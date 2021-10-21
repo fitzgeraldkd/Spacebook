@@ -7,7 +7,7 @@ The internet has finally made it to Mars, and to celebrate a social media site h
 
 ### With Docker
 
-In the main `mysterious-mice\` directory:
+In the main directory where this `README` is saved:
 - Run `docker-compose build` to build the Docker image.
 - Run `docker-compose up -d` to build, create, start and attach the container. The `d` runs the container in the background.
 
@@ -15,14 +15,14 @@ Open the web app by going to `localhost:8000` in your web browser.
 
 ### Without Docker
 
-In the main `mysterious-mice\` directory, create and activate a virtual environment:
+In the main directory where this `README` is saved, create and activate a virtual environment:
 - Windows:
   - Run `python -m venv venv` to create the virtual environment.
   - Run `venv\Scripts\Activate` to activate the virtual environment.
 
 - Linux / OS X:
   - Run `python3 -m venv venv` to create the virtual environment.
-  - Run `source venv\Scripts\activate` to activate the virtual environment.
+  - Run `source venv/bin/activate` to activate the virtual environment.
 - Run `python -m pip install --upgrade pip` to ensure the latest version of pip is installed.
 - Run `python -m pip install -r requirements.txt` to install all the required packages.
 
