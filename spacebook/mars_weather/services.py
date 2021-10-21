@@ -17,7 +17,10 @@ def get_current_weather(request):
 
     weather_data = request.session["weather_data"]
 
-    current_sol = weather_data["sol_keys"][-1]
+    try:
+        current_sol = weather_data["sol_keys"][-1]
+    except IndexError:
+        return {}
 
     context = dict.fromkeys(["AT", "PRE", "HWS"])
 
@@ -42,14 +45,17 @@ def get_week_weather(request):
 
     weather_data = request.session["weather_data"]
 
-    return {
-        "weekly_weather": [
-            {weather_data["sol_keys"][0]: weather_data[weather_data["sol_keys"][0]]},
-            {weather_data["sol_keys"][1]: weather_data[weather_data["sol_keys"][1]]},
-            {weather_data["sol_keys"][2]: weather_data[weather_data["sol_keys"][2]]},
-            {weather_data["sol_keys"][3]: weather_data[weather_data["sol_keys"][3]]},
-            {weather_data["sol_keys"][4]: weather_data[weather_data["sol_keys"][4]]},
-            {weather_data["sol_keys"][5]: weather_data[weather_data["sol_keys"][5]]},
-            {weather_data["sol_keys"][6]: weather_data[weather_data["sol_keys"][6]]},
-        ],
-    }
+    try: 
+        return {
+            "weekly_weather": [
+                {weather_data["sol_keys"][0]: weather_data[weather_data["sol_keys"][0]]},
+                {weather_data["sol_keys"][1]: weather_data[weather_data["sol_keys"][1]]},
+                {weather_data["sol_keys"][2]: weather_data[weather_data["sol_keys"][2]]},
+                {weather_data["sol_keys"][3]: weather_data[weather_data["sol_keys"][3]]},
+                {weather_data["sol_keys"][4]: weather_data[weather_data["sol_keys"][4]]},
+                {weather_data["sol_keys"][5]: weather_data[weather_data["sol_keys"][5]]},
+                {weather_data["sol_keys"][6]: weather_data[weather_data["sol_keys"][6]]},
+            ],
+        }
+    except IndexError:
+        return {}
