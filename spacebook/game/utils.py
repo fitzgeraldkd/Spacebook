@@ -15,15 +15,19 @@ def new_game(request):
     # Attempt to pull the weather for the current sol
     # If weather data is missing for current sol, get data for previous sol
     # If data is still missing, use default values
-    week_weather = get_week_weather(request)
-    for sol in range(-1, -3, -1):
-        sol_weather = week_weather["weekly_weather"][sol]
-        sol_weather_key = list(sol_weather.keys())[0]
-        sol_weather_data = sol_weather[sol_weather_key]
-        if "HWS" in sol_weather_data and "AT" in sol_weather_data:
-            wind_speed = sol_weather_data["HWS"]["av"]
-            temperature = sol_weather_data["AT"]["av"]
-            break
+    try:
+        week_weather = get_week_weather(request)
+        for sol in range(-1, -3, -1):
+            sol_weather = week_weather["weekly_weather"][sol]
+            sol_weather_key = list(sol_weather.keys())[0]
+            sol_weather_data = sol_weather[sol_weather_key]
+            if "HWS" in sol_weather_data and "AT" in sol_weather_data:
+                wind_speed = sol_weather_data["HWS"]["av"]
+                temperature = sol_weather_data["AT"]["av"]
+                break
+    except:
+        wind_speed = 6
+        temperature = -60
     try:
         if wind_speed is None or wind_speed == "":
             wind_speed = 6
